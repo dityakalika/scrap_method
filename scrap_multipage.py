@@ -1,8 +1,11 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
+import pandas as pd
 
 # MENGAMBIL DARI BEBERAPA HALAMAN (MULTIPLE PAGES)
+
+data = []
 
 for page in range(1,11):
     if page == 1:
@@ -25,3 +28,14 @@ for page in range(1,11):
         print(quote)
         print(author)
         print(tags)
+
+        data.append({
+            'quote': quote,
+            'author': author,
+            'tags': tags
+        })
+
+# SAVE HASIL SCRAP DI CSV
+
+df = pd.DataFrame(data)
+df.to_csv('all_quotes.csv', encoding="utf-8", index=False)
